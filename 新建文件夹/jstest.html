@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="button1">测试</button>
+  <button id="button2">测试2</button>
+  <table>
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>职位</th>
+                    <th>头像</th>
+                    <th>入职时间</th>
+                    <th>最后操作时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>张三</td>
+                    <td>男</td>
+                    <td>教授</td>
+                    <td><img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='10' r='5' fill='%23007BFF'/%3E%3Crect x='6' y='18' width='12' height='2' rx='1' fill='%23007BFF'/%3E%3C/svg%3E" alt="头像" class="avatar"></td>
+                    <td>2020-03-15</td>
+                    <td>2023-05-20 14:30:25</td>
+                    <td>
+                        <div class="operation-buttons">
+                            <button class="edit-btn" onclick="editRow(this)">编辑</button>
+                            <button class="delete-btn" onclick="deleteRow(this)">删除</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>李四</td>
+                    <td>女</td>
+                    <td>副教授</td>
+                    <td><img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='10' r='5' fill='%23FF6B6B'/%3E%3Crect x='6' y='18' width='12' height='2' rx='1' fill='%23FF6B6B'/%3E%3C/svg%3E" alt="头像" class="avatar"></td>
+                    <td>2019-07-10</td>
+                    <td>2023-06-18 09:15:42</td>
+                    <td>
+                        <div class="operation-buttons">
+                            <button class="edit-btn" onclick="editRow(this)">编辑</button>
+                            <button class="delete-btn" onclick="deleteRow(this)">删除</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>王五</td>
+                    <td>男</td>
+                    <td>院长</td>
+                    <td><img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='10' r='5' fill='%234ECDC4'/%3E%3Crect x='6' y='18' width='12' height='2' rx='1' fill='%234ECDC4'/%3E%3C/svg%3E" alt="头像" class="avatar"></td>
+                    <td>2018-01-05</td>
+                    <td>2023-04-22 16:45:10</td>
+                    <td>
+                        <div class="operation-buttons">
+                            <button class="edit-btn" onclick="editRow(this)">编辑</button>
+                            <button class="delete-btn" onclick="deleteRow(this)">删除</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>赵六</td>
+                    <td>女</td>
+                    <td>研究生</td>
+                    <td><img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='10' r='5' fill='%23FFD166'/%3E%3Crect x='6' y='18' width='12' height='2' rx='1' fill='%23FFD166'/%3E%3C/svg%3E" alt="头像" class="avatar"></td>
+                    <td>2022-09-12</td>
+                    <td>2023-07-01 11:20:33</td>
+                    <td>
+                        <div class="operation-buttons">
+                            <button class="edit-btn" onclick="editRow(this)">编辑</button>
+                            <button class="delete-btn" onclick="deleteRow(this)">删除</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>钱七</td>
+                    <td>男</td>
+                    <td>导员</td>
+                    <td><img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='10' r='5' fill='%236A0DAD'/%3E%3Crect x='6' y='18' width='12' height='2' rx='1' fill='%236A0DAD'/%3E%3C/svg%3E" alt="头像" class="avatar"></td>
+                    <td>2021-04-25</td>
+                    <td>2023-06-30 13:55:17</td>
+                    <td>
+                        <div class="operation-buttons">
+                            <button class="edit-btn" onclick="editRow(this)">编辑</button>
+                            <button class="delete-btn" onclick="deleteRow(this)">删除</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script src="./JS/a.js" type="module">
+         
+        </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+/* span{
+  color: #A159E6;
+} */
+ .cls{
+  color: #cd2bd9;
+ }
+ #abc{
+  color: #0b0bdc;
+ }
+ /* 去除超链接的下划线 */
+#x{
+  text-decoration: none;
+}
+p{
+  text-indent: 2em;
+}
+ div{
+  
+  width: 70%;
+ margin: 0 auto;
+
+} 
