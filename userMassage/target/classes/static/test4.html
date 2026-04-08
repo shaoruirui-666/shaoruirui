@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能学习辅助系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 表头样式 */
+        .header {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
+        .logout-btn {
+            background-color: #fff;
+            color: #007BFF;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .logout-btn:hover {
+            background-color: #e6e6e6;
+        }
+        
+        /* 查询框样式 */
+        .search-container {
+            background-color: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .search-form {
+            display: flex;
+            gap: 15px;
+            align-items: end;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            flex: 1; /* 均分剩余空间 */
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+            height: 38px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1px;
+        }
+
+        .search-btn, .clear-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .search-btn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .clear-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .search-btn:hover {
+            background-color: #218838;
+        }
+
+        .clear-btn:hover {
+            background-color: #5a6268;
+        }
+        
+        /* 表格样式 */
+        .table-container {
+            background-color: white;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow-x: auto;
+            flex: 1;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px; /* 确保表格有足够宽度显示所有列 */
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #333;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .operation-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .edit-btn, .delete-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .edit-btn {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        /* 底部版权信息样式 */
+        .footer {
+            background-color: #6c757d;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-weight: bold;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body id="app">
+    <!-- 表头部分 -->
+    <header class="header">
+        <h1>智能学习辅助系统</h1>
+        <button class="logout-btn">退出登录</button>
+    </header>
+    
+    <!-- 查询框部分 -->
+    <div class="search-container" >
+        {{ searchForm}}
+        <form class="search-form" id="searchForm" >
+            
+            <div class="form-group">
+                <label for="name">姓名:</label>
+                <input type="text" id="name" name="name" placeholder="请输入姓名" v-model="searchForm.name" >
+            </div>
+            
+            <div class="form-group">
+                <label for="gender">性别:</label>
+                <select id="gender" name="gender" v-model="searchForm.sex">
+                    <option value="">请选择</option>
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="position">职位:</label>
+                <select id="position" name="position" v-model="searchForm.position">
+                    <option value="">请选择</option>
+                    <option value="1">教授</option>
+                    <option value="2">副教授</option>
+                    <option value="3">院长</option>
+                    <option value="4">研究生</option>
+                    <option value="5">导员</option>
+                </select>
+            </div>
+            
+            <div class="btn-group">
+                <button type="button" class="search-btn" v-on:click="search()">查询</button>
+                <button type="button" class="clear-btn" @click="qingkong()">清除</button>
+            </div>
+        </form>
+    </div>
+    
+    <!-- 表格部分 -->
+    <div id="app">
+        <table>
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>职位</th>
+                    <th>头像</th>
+                    <th>入职时间</th>
+                    <th>最后操作时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(e, index) in list" :key="e.id">
+                    <td>{{e.id}}</td>
+                    <td>{{e.name}}</td>
+                    <td>
+                        <span v-if="e.gender=='1'">男</span>
+                        <span v-else-if="e.gender=='2'">女</span>
+                    </td>
+                    
+                    <!-- <td>
+                      <span v-if=e.position=="1">教授</span>
+                      <span v-else-if=e.position=="2">副教授</span>
+                      <span v-else-if=e.position=="3">院长</span>
+                      <span v-else-if=e.position=="4">研究生</span>
+                      <span v-else-if=e.position=="5">导员</span>           
+                      <span v-else>未知</span>
+                    </td> -->
+                     <td>
+                      <span v-show="e.job==1">教授</span>
+                      <span v-show="e.job==2">副教授</span>
+                      <span v-show="e.job==3">院长</span>
+                      <span v-show="e.job==4">研究生</span>
+                      <span v-show="e.job==5">导员</span>           
+                      
+                    </td>
+                     <td><img :src="e.image" alt="头像" class="avatar"></td>
+                    <td>{{e.entrydate}}</td>
+                    <td>{{e.updatetime}}</td>
+                    <td>
+                        <div class="operation-buttons">
+                            <button class="edit-btn" onclick="editRow(this)">编辑</button>
+                            <button class="delete-btn" onclick="deleteRow(this)">删除</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 版权信息底部 -->
+    <footer class="footer">
+        <p >智能学习辅助系统，版权所有，保留所有权利。</p>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module">
+        import{createApp} from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+        createApp({
+            methods: {
+                qingkong(){
+                    this.searchForm.name="";
+                    this.searchForm.sex="";
+                    this.searchForm.position="";
+                    this.search();
+                },
+               async search(){
+                  let res=  await axios.get("https://web-server.itheima.net/emps/list?name="+this.searchForm.name+"&gender="+this.searchForm.sex+"&job="+
+                    this.searchForm.position)
+                    this.list=res.data.data;
+                }
+            },
+            mounted(){
+                this.search();
+            },
+            data() {
+
+                return {
+                    searchForm: {
+                        name:"",
+                        sex: "",
+                        position: ""
+                    },
+                    
+                    
+                        list:[
+                      
+                        
+                    ]
+                }
+        }
+        
+    }).mount('#app')
+    </script>
+  
+</body>
+</html>
